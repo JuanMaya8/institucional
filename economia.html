@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecosistema de la Economía Solidaria - Mapa Mental</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .student-info {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto 40px auto;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .mind-map-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 40px;
+        }
+        
+        .central-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .central-node {
+            display: inline-block;
+            width: 280px;
+            height: 120px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(238, 90, 36, 0.4);
+            margin: 0 auto;
+        }
+        
+        .branches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .branch {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: fit-content;
+        }
+        
+        .branch:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .branch h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+        
+        .branch ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .branch li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        .branch li:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: inherit;
+            font-size: 0.8rem;
+            top: 2px;
+        }
+        
+        /* Colores para cada rama */
+        .ejes {
+            border-left-color: #3742fa;
+        }
+        .ejes h3 { color: #3742fa; }
+        
+        .empresas {
+            border-left-color: #2ed573;
+        }
+        .empresas h3 { color: #2ed573; }
+        
+        .cooperativas {
+            border-left-color: #ff6348;
+        }
+        .cooperativas h3 { color: #ff6348; }
+        
+        .fondos {
+            border-left-color: #ff9ff3;
+        }
+        .fondos h3 { color: #ff9ff3; }
+        
+        .mutuales {
+            border-left-color: #ffa502;
+        }
+        .mutuales h3 { color: #ffa502; }
+        
+        .integracion {
+            border-left-color: #7bed9f;
+        }
+        .integracion h3 { color: #7bed9f; }
+        
+        .definitions {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .definitions h2 {
+            color: #2f3542;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2rem;
+        }
+        
+        .def-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .def-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+            height: fit-content;
+        }
+        
+        .def-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .def-card.cooperativas-card { border-left-color: #ff6348; }
+        .def-card.fondos-card { border-left-color: #ff9ff3; }
+        .def-card.mutuales-card { border-left-color: #ffa502; }
+        
+        .def-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .def-card p {
+            line-height: 1.6;
+            color: #2f3542;
+            text-align: justify;
+        }
+        
+        .integration-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #7bed9f;
+        }
+        
+        .integration-section h3 {
+            color: #2f3542;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .integration-item {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid;
+        }
+        
+        .integration-item.cooperativas-int { border-left-color: #ff6348; }
+        .integration-item.fondos-int { border-left-color: #ff9ff3; }
+        .integration-item.mutuales-int { border-left-color: #ffa502; }
+        
+        .integration-item h4 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .integration-item p {
+            line-height: 1.5;
+            font-size: 0.95rem;
+            color: #2f3542;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .branches-grid,
+            .def-grid,
+            .integration-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .central-node {
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .mind-map-container,
+            .definitions {
+                padding: 20px 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .branch,
+            .def-card,
+            .integration-item {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌟 ECOSISTEMA DE LA ECONOMÍA SOLIDARIA 🌟</h1>
+            <p>Organizaciones que trabajan juntas para el desarrollo territorial</p>
+        </div>
+        
+        <div class="student-info">
+            <strong>Estudiante:</strong> Juan David Maya Benavides 
+            <strong>ID:</strong> 877999 
+            <strong>Campus:</strong> Pasto 
+            <strong>Programa:</strong> Ingenieria de Software
+        </div>
+        
+        <div class="mind-map-container">
+            <div class="central-section">
+                <div class="central-node">
+                    <div>
+                        <strong>ECONOMÍA SOLIDARIA</strong><br>
+                        Ecosistema Integral
+                    </div>
+                </div>
+            </div>
+            
+            <div class="branches-grid">
+                <div class="branch ejes">
+                    <h3>📊 4 EJES FUNDAMENTALES</h3>
+                    <ul>
+                        <li><strong>Eje Económico:</strong> Generación y distribución equitativa de ingresos</li>
+                        <li><strong>Eje Social:</strong> Beneficio colectivo y mejora de calidad de vida</li>
+                        <li><strong>Eje Ambiental:</strong> Relación armónica con la naturaleza</li>
+                        <li><strong>Eje Cultural:</strong> Preservación de valores comunitarios</li>
+                    </ul>
+                </div>
+                
+                <div class="branch empresas">
+                    <h3>🏢 PRINCIPALES EMPRESAS</h3>
+                    <ul>
+                        <li><strong>1. Cooperativas:</strong> Actividades económicas conjuntas</li>
+                        <li><strong>2. Fondos de Empleados:</strong> Ahorro y crédito laboral</li>
+                        <li><strong>3. Asociaciones Mutuales:</strong> Servicios de seguridad social</li>
+                    </ul>
+                </div>
+                
+                <div class="branch cooperativas">
+                    <h3>🤝 COOPERATIVAS</h3>
+                    <ul>
+                        <li><strong>Especializadas:</strong> Una actividad económica</li>
+                        <li><strong>Multiactivas:</strong> Varias actividades económicas</li>
+                        <li><strong>Integrales:</strong> Todas las actividades necesarias</li>
+                        <li><strong>Principio:</strong> Un asociado, un voto</li>
+                        <li><strong>Regulación:</strong> Ley 79/1988 y Ley 454/1989</li>
+                    </ul>
+                </div>
+                
+                <div class="branch fondos">
+                    <h3>💰 FONDOS DE EMPLEADOS</h3>
+                    <ul>
+                        <li><strong>Asociados:</strong> Trabajadores asalariados</li>
+                        <li><strong>Aportes:</strong> Máximo 10% del salario</li>
+                        <li><strong>Beneficios:</strong> Créditos con tasas bajas</li>
+                        <li><strong>Servicios:</strong> Recreación, salud, educación</li>
+                        <li><strong>Base:</strong> Banca ética y solidaria</li>
+                    </ul>
+                </div>
+                
+                <div class="branch mutuales">
+                    <h3>🛡️ ASOCIACIONES MUTUALES</h3>
+                    <ul>
+                        <li><strong>Finalidad:</strong> Ayuda recíproca ante riesgos</li>
+                        <li><strong>Servicios:</strong> Seguridad social integral</li>
+                        <li><strong>Ofertas:</strong> Recreación, seguros, ahorro</li>
+                        <li><strong>Principio:</strong> Reciprocidad y solidaridad</li>
+                        <li><strong>Regulación:</strong> Decreto 1480/1989</li>
+                    </ul>
+                </div>
+                
+                <div class="branch integracion">
+                    <h3>🔗 ORGANISMOS DE INTEGRACIÓN</h3>
+                    <ul>
+                        <li><strong>Económica:</strong> La Equidad, Coopcentral, Visionamos</li>
+                        <li><strong>Gremial:</strong> CONFECOOP, ANALFE, Confederación Mutuales</li>
+                        <li><strong>Federaciones:</strong> FECOLFIN, FENSECOOP, ECOMUN</li>
+                        <li><strong>Capacitación:</strong> CINCOOP</li>
+                        <li><strong>Objetivo:</strong> Fortalecimiento sectorial</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="definitions">
+            <h2>💡 DIFERENCIAS PRINCIPALES ENTRE EMPRESAS</h2>
+            <div class="def-grid">
+                <div class="def-card cooperativas-card">
+                    <h3>🤝 COOPERATIVAS</h3>
+                    <p>Son organizaciones donde las personas se agrupan para desarrollar actividades económicas conjuntas. Se caracterizan por la gestión democrática (un asociado, un voto), pueden ser especializadas, multiactivas o integrales, y se regulan por las Leyes 79/1988 y 454/1989. Su enfoque principal es la generación de ingresos y su distribución equitativa entre los asociados.</p>
+                </div>
+                
+                <div class="def-card fondos-card">
+                    <h3>💰 FONDOS DE EMPLEADOS</h3>
+                    <p>Se constituyen exclusivamente con trabajadores asalariados de una misma empresa o sector económico. Su actividad principal es el ahorro y crédito, donde los asociados aportan máximo el 10% de su salario. Ofrecen créditos con tasas preferenciales y servicios complementarios de bienestar. Se rigen por el Decreto 1481/1989 y operan bajo principios de banca ética.</p>
+                </div>
+                
+                <div class="def-card mutuales-card">
+                    <h3>🛡️ ASOCIACIONES MUTUALES</h3>
+                    <p>Su finalidad específica es brindar ayuda recíproca ante riesgos eventuales y satisfacer necesidades mediante servicios de seguridad social. Ofrecen servicios como recreación, seguros exequiales, afiliación colectiva a seguridad social y fomento del ahorro. Se regulan por el Decreto 1480/1989 y se basan en los principios de reciprocidad y solidaridad.</p>
+                </div>
+            </div>
+            
+            <div class="integration-section">
+                <h3>🌐 INTEGRACIÓN GREMIAL POR TIPO DE EMPRESA</h3>
+                <div class="integration-grid">
+                    <div class="integration-item cooperativas-int">
+                        <h4>🤝 COOPERATIVAS</h4>
+                        <p><strong>CONFECOOP:</strong> Lidera la representación gremial nacional de cooperativas. <strong>Federaciones especializadas:</strong> FECOLFIN (cooperativas financieras), FENSECOOP (sector salud), CINCOOP (capacitación cooperativa).</p>
+                    </div>
+                    
+                    <div class="integration-item fondos-int">
+                        <h4>💰 FONDOS DE EMPLEADOS</h4>
+                        <p><strong>ANALFE:</strong> Asociación Nacional de Fondos de Empleados que los representa ante instancias gubernamentales, promueve su desarrollo sectorial y defiende los intereses del gremio a nivel nacional.</p>
+                    </div>
+                    
+                    <div class="integration-item mutuales-int">
+                        <h4>🛡️ ASOCIACIONES MUTUALES</h4>
+                        <p><strong>Confederación de Asociaciones Mutuales:</strong> Cumple el rol de integración gremial y representación del sector mutual ante el gobierno y otras instancias nacionales e internacionales.</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 10px;">
+                    <p><strong>🎯 Función Común de los Organismos Gremiales:</strong> Todos buscan la defensa del marco normativo sectorial, incidencia ante instancias gubernamentales, promoción de la integración económica entre sus asociados y difusión de la ideología solidaria para fortalecer el movimiento cooperativo y mutual en Colombia.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>📚 Evaluación Momento 1 - Economía Solidaria</strong></p>
+            <p>Mapa Mental Digital Interactivo</p>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animación de entrada suave para las ramas
+            const branches = document.querySelectorAll('.branch');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            branches.forEach(branch => {
+                branch.style.opacity = '0';
+                branch.style.transform = 'translateY(20px)';
+                branch.style.transition = 'all 0.6s ease';
+                observer.observe(branch);
+            });
+            
+            // Efectos hover mejorados
+            const cards = document.querySelectorAll('.def-card, .integration-item');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2))';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
